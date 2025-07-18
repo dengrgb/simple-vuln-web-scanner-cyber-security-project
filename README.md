@@ -28,7 +28,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-# Simple Web Vulnerability Scanner 🔍
+# Simple Web Vulnerability Scanner 
 
 A basic Python-based web vulnerability scanner that checks for:
 
@@ -36,11 +36,11 @@ A basic Python-based web vulnerability scanner that checks for:
 - Directory listing
 - Missing security headers
 
-## 🚀 How to Run
+##  How to Run
 
 1. Clone the repo:
 ```bash
-git clone https://github.com/yourusername/web-vulnerability-scanner.git
+git clone https://github.com/denfrgb/web-vulnerability-scanner.git
 cd web-vulnerability-scanner
 
 
