@@ -1,33 +1,81 @@
-import requests
-from bs4 import BeautifulSoup
-from colorama import Fore
+  Simple Web Vulnerability Scanner
 
-def check_clickjacking(url):
-    print(Fore.CYAN + "[+] Checking for Clickjacking...")
-    headers = requests.get(url).headers
-    if 'X-Frame-Options' not in headers:
-        print(Fore.RED + "[-] Vulnerable to Clickjacking!")
-    else:
-        print(Fore.GREEN + "[+] X-Frame-Options is set!")
+A beginner-friendly Python tool that scans websites for common web security misconfigurations.
 
-def check_directory_listing(url):
-    print(Fore.CYAN + "[+] Checking for Directory Listing...")
-    common_paths = ["/admin", "/backup", "/.git", "/config", "/uploads"]
-    for path in common_paths:
-        full_url = url + path
-        response = requests.get(full_url)
-        if "Index of" in response.text or response.status_code == 200:
-            print(Fore.RED + f"[-] Possible directory listing at {full_url}")
-        else:
-            print(Fore.GREEN + f"[+] {full_url} looks safe.")
+Created by [@dengrgb](https://github.com/dengrgb)
 
-def main():
-    target = input("Enter target URL (e.g., https://example.com): ")
-    check_clickjacking(target)
-    check_directory_listing(target)
+---
 
-if __name__ == "__main__":
-    main()
+Features
+
+-  Clickjacking detection (`X-Frame-Options`)
+-   Common exposed directories check (`/admin`, `/uploads`, etc.)
+-  Missing HTTP security headers check
+-  Color-coded CLI output with `colorama`
+
+---
+
+ Requirements
+
+Make sure Python is installed, then install dependencies:
+
+```bash
+pip install -r requirements.txt
+requirements.txt content:
+
+
+
+requests
+How to Use
+1 Clone the project:
+
+bash
+git clone https://github.com/dengrgb/web-vulnerability-scanner.git
+cd web-vulnerability-scanner
+2 Run the script
+python scanner.py
+3 When prompted, enter a full website URL (with http:// or https://):
+
+Enter full URL (e.g., https://example.com): http://testphp.vulnweb.com
+4 What It Checks
+Check	Description
+Clickjacking	Verifies if X-Frame-Options header is missing
+ Security Headers	Looks for 4 important HTTP headers
+ Directory Listing	Attempts to access common sensitive folders
+Recommended Test Targets
+Use one of these legally safe URLs:
+
+http://testphp.vulnweb.com
+
+http://demo.testfire.net
+sample output
+https://httpbin.org (for header testing)
+=== Simple Web Vulnerability Scanner ===
+Enter full URL (e.g., https://example.com): http://testphp.vulnweb.com
+
+[+] Checking for Clickjacking...
+[-] Vulnerable: X-Frame-Options not set!
+
+[+] Checking for Missing Security Headers...
+[-] Missing: Content-Security-Policy
+[-] Missing: Strict-Transport-Security
+
+[+] Checking for Directory Listing...
+[!] Possible directory listing at http://testphp.vulnweb.com/admin
+ Author
+Deng Kuot
+GitHub: @dengrgb
+⚠️ Legal Disclaimer
+This tool is for educational purposes only. Do not scan any website you don't own or have explicit permission to test.
+ Support
+If you find this useful, please ⭐ star the repo and follow @dengrgb on GitHub!
+
+
+
+
+
+
+
 
 
 
